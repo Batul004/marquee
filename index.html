@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Marquee with Controls</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
+
+<div id="marquee-container">
+    <div id="marquee-content">
+        <!-- Your marquee content goes here -->
+        Hi... I am Batul Husain
+    </div>
+</div>
+
+<div id="controls">
+    <button onclick="play()"><i class="fas fa-play"></i> Play</button>
+    <button onclick="pause()"><i class="fas fa-pause"></i>Pause</button>
+    <button onclick="fastForward()"><i class="fas fa-fast-forward"></i> Fast Forward</button>
+    <button onclick="rewind()"><i class="fas fa-fast-backward"></i> Rewind</button>
+</div>
+
+<script>
+    var marqueeContent = document.getElementById('marquee-content');
+    var isPaused = false;
+
+    function play() {
+        isPaused = false;
+        marqueeContent.style.animationPlayState = 'running';
+    }
+
+    function pause() {
+        isPaused = true;
+        marqueeContent.style.animationPlayState = 'paused';
+    }
+
+    function fastForward() {
+        marqueeContent.style.animationDuration = '5s';
+        play();
+    }
+
+    function rewind() {
+        marqueeContent.style.animationDirection = 'reverse';
+        play();
+    }
+
+    // Dynamically create and append styles using JavaScript
+    var style = document.createElement('style');
+    style.innerHTML = `
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 50%;
+            border: 1px solid #ccc;
+        }
+
+        #marquee-content {
+            display: inline-block;
+            animation: marqueeAnimation 10s linear infinite;
+        }
+
+        @keyframes marqueeAnimation {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        button {
+            margin: 5px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        #controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+
+</body>
+</html>
